@@ -2,23 +2,28 @@
 class TabLink {
   constructor(element) {
     // Assign this.element to the passed in DOM element
+    //"Capture" the array-like element with the dumb div tab links within the constructor
     this.element = element;
     
     // Get the custom data attribute on the Link
+    // This will grab the numeric value of each data tab within the links
     this.data = this.element.dataset.tab;
-    console.log("this.data", this.data);
+    // console.log("this.data", this.data);
     
     // Using the custom data attribute get the associated Item element
-        // EX: // this.content = tabNav.querySelector(`.content[data-tab="${this.element.dataset.tab}"]`)
-
+    // The code below will connect the data tab links with the data tab content
+    //this.data will be either 1,2,3,4
     this.item = document.querySelector(`.tabs-item[data-tab="${this.data}"]`);
-    console.log("this.itemElement", this.item);
+    // console.log("this.itemElement", this.item);
     
     // Using the Item element, create a new instance of the TabItem class
+    // Make the dumb div smarter with new methods
     this.tabItem = new TabItem(this.item);
-    console.log("tabItem", this.tabItem);
+    // console.log("tabItem", this.tabItem);
     
     // Add a click event listener on this instance, calling the select method on click
+    // this.element are out tab link buttons, we are adding a click event that will invoke
+    // the select method of this instance of TabLink
     this.element.addEventListener('click', () => {
       this.select();
     });
@@ -27,7 +32,7 @@ class TabLink {
   select() {
     // Get all of the elements with the tabs-link class
     const links = document.querySelectorAll('.tabs-link');
-    console.log(links);
+    // console.log(links);
 
     // Using a loop or the forEach method remove the 'tabs-link-selected' class 
     // from all of the links
@@ -48,8 +53,9 @@ class TabLink {
 class TabItem {
   constructor(element) {
     // Assign this.element to the passed in element
-    // this.element;
+    // these are the instance of TabLink that are passed in 1,2,3, and 4
     this.element = element;
+    console.log("this.element within TabItem", this.element);
   }
 
   select() {
@@ -84,7 +90,7 @@ EX: let dropdowns = document.querySelectorAll('.dropdown').forEach( dropdown => 
 
 links = document.querySelectorAll('.tabs-link');
 links.forEach(link => new TabLink(link));
-console.log(links);
+// console.log(links);
 
-// Or compile into one
+// Or combine into one
 // let links = document.querySelectorAll('.tabs-link').forEach( link => new TabLink(link));
